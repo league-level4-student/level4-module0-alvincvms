@@ -96,6 +96,8 @@ public class MazeMaker{
 	//   to the ArrayList
 	private static ArrayList<Cell> getUnvisitedNeighbors(Cell c) {
 		ArrayList<Cell> un = new ArrayList<Cell>();
+		int x1 = -1, x2 = maze.cells.length, y1 = , y2;
+		if
 		for(int i = -1; i <= 1; i++) {
 			for(int j = -1; j <= 1; j++) {
 				if(!maze.getCell(c.getX() + i, c.getY() + j).hasBeenVisited()) {
