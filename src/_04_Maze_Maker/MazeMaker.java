@@ -40,13 +40,13 @@ public class MazeMaker{
 		//C. if has unvisited neighbors,
 		if(un.size() > 0) {
 			//C1. select one at random.
-			Cell c = un.get(randGen.nextInt(un.size()));
+			int r = randGen.nextInt(un.size());
 			//C2. push it to the stack
-			uncheckedCells.push(c);
+			uncheckedCells.push(un.get(r));
 			//C3. remove the wall between the two cells
-			removeWalls(currentCell, c);
+			removeWalls(currentCell, un.get(r));
 			//C4. make the new cell the current cell and mark it as visited
-			currentCell = c;
+			currentCell = un.get(r);
 			currentCell.setBeenVisited(true);
 			//C5. call the selectNextPath method with the current cell
 			selectNextPath(currentCell);
@@ -96,12 +96,25 @@ public class MazeMaker{
 	//   to the ArrayList
 	private static ArrayList<Cell> getUnvisitedNeighbors(Cell c) {
 		ArrayList<Cell> un = new ArrayList<Cell>();
-		int x1 = -1, x2 = maze.cells.length, y1 = , y2;
-		if
-		for(int i = -1; i <= 1; i++) {
-			for(int j = -1; j <= 1; j++) {
+		int x1 = -1, x2 = 1, y1 = -1, y2 = 1;
+		if(c.getX() == 0) {
+			x1 = 0;
+		}
+		else if(c.getX() == maze.cells.length - 1) {
+			x2 = 0;
+		}
+		if(c.getY() == 0) {
+			y1 = 0;
+		}
+		else if(c.getY() == maze.cells[c.getX()].length - 1) {
+			y2 = 0;
+		}
+		for(int i = x1; i <= x2; i++) {
+			for(int j = y1; j <= y2; j++) {
 				if(!maze.getCell(c.getX() + i, c.getY() + j).hasBeenVisited()) {
-					un.add(maze.getCell(c.getX() + i, c.getY() + j));
+					if(i == 0 || j == 0){
+						un.add(maze.getCell(c.getX() + i, c.getY() + j));
+					}
 				}
 			}
 		}
